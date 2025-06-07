@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.components.PageTitle;
 import pages.pom.MainPage;
-import pages.pom.RegisterPage;
 
 import static com.codeborne.selenide.Selenide.page;
 import static org.junit.jupiter.api.Assertions.assertEquals;
