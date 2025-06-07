@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    stageUrl = "https://demowebshop.tricentis.com/"
+}
+
+def environment = project.hasProperty('env') ? project.env : 'stage'
+def siteUrl = {
+    switch(environment) {
+        case 'stage':
+            return stageUrl
+        default:
+            throw new GradleException("Unknown environment: $environment")
+    }
+}.call()
+
+test {
+    useJUnitPlatform()
+    systemProperty 'siteUrl', siteUrl  // 👈 теперь переменная уже определена
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // JUnit 5 — тестовый фреймворк
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+
+    // Selenide — UI автоматизация на Selenium
+    testImplementation 'com.codeborne:selenide:7.5.1'
+
+    // WebDriver Manager — автоматически скачивает драйверы браузеров
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.5.3'
+
+    // Если используешь логирование — например SLF4J
+    testImplementation 'org.slf4j:slf4j-simple:2.0.7'
+}
