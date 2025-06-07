@@ -3,11 +3,20 @@ package models;
 import java.util.Objects;
 
 public class User {
+    private String gender;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String passwordConfirm;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -49,7 +58,15 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public User(String firstName, String lastname, String email, String password, String passwordConfirm) {
+    public User(String gender, String firstName, String lastname, String email, String password, String passwordConfirm) {
+        this.gender = gender;
+        this.firstName = firstName;
+        this.lastName = lastname;
+        this.email = email;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+    }
+    public User( String firstName, String lastname, String email, String password, String passwordConfirm) {
         this.firstName = firstName;
         this.lastName = lastname;
         this.email = email;

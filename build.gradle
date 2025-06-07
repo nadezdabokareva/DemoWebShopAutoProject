@@ -47,4 +47,7 @@ dependencies {
 
     // Если используешь логирование — например SLF4J
     testImplementation 'org.slf4j:slf4j-simple:2.0.7'
+
+    testImplementation 'org.apache.commons:commons-lang3:3.13.0'
+
 }

@@ -3,13 +3,15 @@ package tests;
 import com.codeborne.selenide.WebDriverRunner;
 import data.PageTitleText;
 import global.WebShopSetUpBasePage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.components.PageTitle;
 import pages.pom.MainPage;
 
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Тесты для главной страницы")
@@ -20,6 +22,13 @@ public class MainPageTest {
     public void openBasePage(){
         WebShopSetUpBasePage.openBasePage();
         mainPage = page(MainPage.class);
+    }
+
+    @AfterEach
+    public void clean(){
+        clearBrowserCookies();
+        clearBrowserLocalStorage();
+        closeWebDriver();
     }
 
     @Test
