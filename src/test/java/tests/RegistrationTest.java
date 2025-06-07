@@ -37,14 +37,19 @@ public class RegistrationTest {
         closeWebDriver();
     }
 
-    static Stream<Arguments> positiveDataForRegistration(){
+    static Stream<Arguments> positiveFullDataForRegistration(){
         return Stream.of(
-                Arguments.of(UserGenerator.generateValidUser())
+                Arguments.of(UserGenerator.generateValidUserFullData())
+        );
+    }
+    static Stream<Arguments> positiveRequiredDataForRegistration(){
+        return Stream.of(
+                Arguments.of(UserGenerator.generateValidUserFullData())
         );
     }
 
-    @ParameterizedTest(name = "Регистрация пользователя позитивный тест")
-    @MethodSource("positiveDataForRegistration")
+    @ParameterizedTest(name = "Регистрация пользователя позитивный тест со всеми полями")
+    @MethodSource("positiveFullDataForRegistration")
     public void positiveRegistrationTest(User user){
         registerPage.fillForm(
                 user.getGender(),
@@ -53,6 +58,19 @@ public class RegistrationTest {
                 user.getEmail(),
                 user.getPassword(),
                 user.getPasswordConfirm())
+                .clickRegisterButton();
+        assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
+                "Сообщение о регистрации либо некорректное, либо отсутствует");
+    }
+    @ParameterizedTest(name = "Регистрация пользователя позитивный тест только с обязательными полями")
+    @MethodSource("positiveFullDataForRegistration")
+    public void positiveRegistrationOnlyRequiredTest(User user){
+        registerPage.fillFormOnlyRequiredData(
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getPasswordConfirm())
                 .clickRegisterButton();
         assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
                 "Сообщение о регистрации либо некорректное, либо отсутствует");
