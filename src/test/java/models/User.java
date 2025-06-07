@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
     private String firstName;
-    private String lastname;
+    private String lastName;
     private String email;
     private String password;
     private String passwordConfirm;
@@ -17,12 +17,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -51,10 +51,15 @@ public class User {
 
     public User(String firstName, String lastname, String email, String password, String passwordConfirm) {
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastname;
         this.email = email;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public User(){}
@@ -64,11 +69,20 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastname(), user.getLastname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getPasswordConfirm(), user.getPasswordConfirm());
+        return Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getPasswordConfirm(), user.getPasswordConfirm());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastname(), getEmail(), getPassword(), getPasswordConfirm());
+        return Objects.hash(getFirstName(), getLastName(), getEmail(), getPassword(), getPasswordConfirm());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
