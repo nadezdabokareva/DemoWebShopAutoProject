@@ -4,11 +4,14 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MainPage {
-    @FindBy(xpath = "$(\"a[href='/register']\")")
+    //Кнопки в верхнем меню
+    @FindBy(xpath = "//a[@href='/register']")
     public SelenideElement registerButton;
-    @FindBy(xpath = "$(\"a[href='/login']\")\n")
+
+    @FindBy(xpath = "//a[@href='/login']")
     public SelenideElement loginButton;
-    @FindBy(xpath = "$(\"a[href='/logout']\")\n")
+
+    @FindBy(xpath = "//a[@href='/logout']")
     public SelenideElement logoutButton;
 
 }
