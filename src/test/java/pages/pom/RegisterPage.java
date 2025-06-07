@@ -33,9 +33,6 @@ public class RegisterPage {
     //Титул страницы Регистрации
     public SelenideElement pageTitle = $(byText("Register"));
 
-    public String getRegisterPageTitle(){
-
-    }
     // Заполнение формы регистрации
     public RegisterPage fillForm(String gender, String firstName, String lastName, String email, String password, String confirmPassword) {
         if (gender.equalsIgnoreCase("male")) {
