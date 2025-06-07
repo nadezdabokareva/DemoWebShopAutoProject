@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import pages.pom.MainPage;
 import pages.pom.RegisterPage;
@@ -62,9 +63,23 @@ public class RegistrationTest {
         assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
                 "Сообщение о регистрации либо некорректное, либо отсутствует");
     }
+
     @ParameterizedTest(name = "Регистрация пользователя позитивный тест только с обязательными полями")
     @MethodSource("positiveFullDataForRegistration")
     public void positiveRegistrationOnlyRequiredTest(User user){
+        registerPage.fillFormOnlyRequiredData(
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getPasswordConfirm())
+                .clickRegisterButton();
+        assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
+                "Сообщение о регистрации либо некорректное, либо отсутствует");
+    }
+    @ParameterizedTest(name = "Регистрация пользователя негативные кейсы")
+    @CsvSource("{}")
+    public void negativeRegistrationEmptyFieldTest(User user){
         registerPage.fillFormOnlyRequiredData(
                         user.getFirstName(),
                         user.getLastName(),
