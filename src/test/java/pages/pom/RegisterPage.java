@@ -31,6 +31,7 @@ public class RegisterPage {
     public SelenideElement wrongEmailError = $(byText("Wrong email"));
     public SelenideElement passwordIncorrectError = $(byText("The password should have at least 6 characters."));
     public SelenideElement emailAlreadyExistError = $(byText("The specified email already exists"));
+    public SelenideElement passwordsNotMatchError = $(byText(" The password and confirmation password do not match."));
 
     public SelenideElement resultMessage = $(".result");
 
@@ -105,6 +106,12 @@ public class RegisterPage {
     @DisplayName("Проверить, что отображается ошибка, что такой email уже зарегистрирован")
     public boolean emailAlreadyExist(){
         emailAlreadyExistError.shouldBe(Condition.visible);
+        return true;
+    }
+
+    @DisplayName("Проверить, что отображается ошибка, когда пароли не совпадают")
+    public boolean checkPasswordsNotMatchError(){
+        passwordsNotMatchError.shouldBe(Condition.visible);
         return true;
     }
 }

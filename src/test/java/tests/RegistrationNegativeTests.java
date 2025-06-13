@@ -127,20 +127,19 @@ public class RegistrationNegativeTests {
     @MethodSource("positiveFullDataForRegistration")
     public void registerUserWithDifferentPasswordAndConfirmPasswordEmailTest(User user){
         String password = user.getEmail();
+        String confirmPassword = "Test1234";
         registerPage.fillForm(
                         user.getGender(),
                         user.getFirstName(),
                         user.getLastName(),
                         user.getEmail(),
-                        user.getPassword(),
-                        user.getPasswordConfirm())
+                        password,
+                        confirmPassword)
                 .clickRegisterButton();
 
-        mainPage.logoutButton.click();
-
-
-        assertTrue(registerPage.emailAlreadyExist(),
-                "При регистрации с уже существующем email нет ошибки, email:" + existingEmail);
+        assertTrue(registerPage.checkPasswordsNotMatchError(),
+                "При регистрации с несовпадающими паролями нет ошибки, пароль первый:" + password +
+                        "Подтверждающий пароль:" + confirmPassword);
     }
 
 
