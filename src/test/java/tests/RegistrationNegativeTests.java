@@ -95,7 +95,7 @@ public class RegistrationNegativeTests {
 
     @ParameterizedTest(name = "Зарегистрировать юзера с уже существующим email {0}")
     @MethodSource("positiveFullDataForRegistration")
-    public void positiveRegistrationTest(User user){
+    public void registerUserWithExistingEmailTest(User user){
         String existingEmail = user.getEmail();
         registerPage.fillForm(
                         user.getGender(),
@@ -118,6 +118,26 @@ public class RegistrationNegativeTests {
                         user.getPassword(),
                         user.getPasswordConfirm())
                 .clickRegisterButton();
+
+        assertTrue(registerPage.emailAlreadyExist(),
+                "При регистрации с уже существующем email нет ошибки, email:" + existingEmail);
+    }
+
+    @ParameterizedTest(name = "Зарегистрировать юзера с несовпадающими password и confirm password {0}")
+    @MethodSource("positiveFullDataForRegistration")
+    public void registerUserWithDifferentPasswordAndConfirmPasswordEmailTest(User user){
+        String password = user.getEmail();
+        registerPage.fillForm(
+                        user.getGender(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getPasswordConfirm())
+                .clickRegisterButton();
+
+        mainPage.logoutButton.click();
+
 
         assertTrue(registerPage.emailAlreadyExist(),
                 "При регистрации с уже существующем email нет ошибки, email:" + existingEmail);
