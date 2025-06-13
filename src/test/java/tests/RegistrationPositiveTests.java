@@ -19,7 +19,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static data.SystemMessages.successfulRegistration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationTest {
+public class RegistrationPositiveTests {
     private MainPage mainPage;
     private RegisterPage registerPage;
 
@@ -77,17 +77,5 @@ public class RegistrationTest {
         assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
                 "Сообщение о регистрации либо некорректное, либо отсутствует");
     }
-    @ParameterizedTest(name = "Регистрация пользователя негативные кейсы")
-    @CsvSource("{}")
-    public void negativeRegistrationEmptyFieldTest(User user){
-        registerPage.fillFormOnlyRequiredData(
-                        user.getFirstName(),
-                        user.getLastName(),
-                        user.getEmail(),
-                        user.getPassword(),
-                        user.getPasswordConfirm())
-                .clickRegisterButton();
-        assertEquals(registerPage.getRegistrationResult(), successfulRegistration,
-                "Сообщение о регистрации либо некорректное, либо отсутствует");
-    }
+
 }

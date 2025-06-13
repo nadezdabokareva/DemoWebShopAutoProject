@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Тесты для главной страницы")
-public class MainPageTest {
+public class MainPageTests {
     private MainPage mainPage;
 
     @BeforeEach

@@ -1,5 +1,6 @@
 package pages.pom;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.DisplayName;
 
@@ -23,11 +24,11 @@ public class RegisterPage {
     public SelenideElement registerButton = $("#register-button");
 
     // Сообщения об ошибках
-    public SelenideElement firstNameError = $("#FirstName-error");
-    public SelenideElement lastNameError = $("#LastName-error");
-    public SelenideElement emailError = $("#Email-error");
-    public SelenideElement passwordError = $("#Password-error");
-    public SelenideElement confirmPasswordError = $("#ConfirmPassword-error");
+    public SelenideElement firstNameError = $(byText("First name is required."));;
+    public SelenideElement lastNameError = $(byText("Last name is required."));;
+    public SelenideElement emailError = $(byText("Email is required."));;
+    public SelenideElement passwordError = $(byText("Password is required."));;
+    public SelenideElement confirmPasswordError = $(byText("Confirm password is required."));;
 
     public SelenideElement resultMessage = $(".result");
 
@@ -76,5 +77,14 @@ public class RegisterPage {
     public String getRegistrationResult(){
         String  result = resultMessage.getText();
         return result;
+    }
+
+    @DisplayName("Проверить, что отображаются ошибки о том, что не заполнены обязательные поля")
+    public boolean checkThatErrorsIsVisible(){
+        firstNameError.shouldBe(Condition.visible);
+        lastNameError.shouldBe(Condition.visible);
+        emailError.shouldBe(Condition.visible);
+        passwordError.shouldBe(Condition.visible);
+        return true;
     }
 }
