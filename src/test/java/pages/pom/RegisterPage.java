@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.DisplayName;
 
-import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -26,9 +25,12 @@ public class RegisterPage {
     // Сообщения об ошибках
     public SelenideElement firstNameError = $(byText("First name is required."));
     public SelenideElement lastNameError = $(byText("Last name is required."));
-    public SelenideElement emailError = $(byText("Email is required."));;
+    public SelenideElement emailError = $(byText("Email is required."));
     public SelenideElement passwordError = $(byText("Password is required."));
-    public SelenideElement confirmPasswordError = $(byText("Confirm password is required."));;
+    public SelenideElement confirmPasswordError = $(byText("Confirm password is required."));
+    public SelenideElement wrongEmailError = $(byText("Wrong email"));
+    public SelenideElement passwordIncorrectError = $(byText("The password should have at least 6 characters."));
+    public SelenideElement emailAlreadyExistError = $(byText("The specified email already exists"));
 
     public SelenideElement resultMessage = $(".result");
 
@@ -87,9 +89,22 @@ public class RegisterPage {
         passwordError.shouldBe(Condition.visible);
         return true;
     }
+
     @DisplayName("Проверить, что отображаются ошибка Wrong email")
     public boolean wrongEmailErrorIsVisible(){
         wrongEmailError.shouldBe(Condition.visible);
+        return true;
+    }
+
+    @DisplayName("Проверить, что отображается ошибка с некорректной длиной password")
+    public boolean wrongPasswordErrorIsVisible(){
+        passwordIncorrectError.shouldBe(Condition.visible);
+        return true;
+    }
+
+    @DisplayName("Проверить, что отображается ошибка, что такой email уже зарегистрирован")
+    public boolean emailAlreadyExist(){
+        emailAlreadyExistError.shouldBe(Condition.visible);
         return true;
     }
 }
