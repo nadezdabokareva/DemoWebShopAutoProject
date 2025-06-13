@@ -24,10 +24,10 @@ public class RegisterPage {
     public SelenideElement registerButton = $("#register-button");
 
     // Сообщения об ошибках
-    public SelenideElement firstNameError = $(byText("First name is required."));;
-    public SelenideElement lastNameError = $(byText("Last name is required."));;
+    public SelenideElement firstNameError = $(byText("First name is required."));
+    public SelenideElement lastNameError = $(byText("Last name is required."));
     public SelenideElement emailError = $(byText("Email is required."));;
-    public SelenideElement passwordError = $(byText("Password is required."));;
+    public SelenideElement passwordError = $(byText("Password is required."));
     public SelenideElement confirmPasswordError = $(byText("Confirm password is required."));;
 
     public SelenideElement resultMessage = $(".result");
@@ -85,6 +85,11 @@ public class RegisterPage {
         lastNameError.shouldBe(Condition.visible);
         emailError.shouldBe(Condition.visible);
         passwordError.shouldBe(Condition.visible);
+        return true;
+    }
+    @DisplayName("Проверить, что отображаются ошибка Wrong email")
+    public boolean wrongEmailErrorIsVisible(){
+        wrongEmailError.shouldBe(Condition.visible);
         return true;
     }
 }

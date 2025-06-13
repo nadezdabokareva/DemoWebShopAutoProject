@@ -48,9 +48,12 @@ public class RegistrationNegativeTests {
 
     @ParameterizedTest(name = "Зарегистрировать пользователя с некорректным email")
     @CsvSource({
+            "testEmailWithot.gmail.com",
+            "testEmailWithoutEnd@",
+            "testEmailWithoutDomain@gmail.",
+            "тестовыйпочтовый@нб.рф",
             "",
-            "",
-            ""})
+            "email WthSpace@gmail.com"})
     public void registerUserWithIncorrectEmailTest(String email){
         registerPage.fillFormOnlyRequiredData(
                 "Test First Name",
